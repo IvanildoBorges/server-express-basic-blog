@@ -1,0 +1,19 @@
+{
+  "name": "servidor-nodejs-express",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ivanildo Borges",
+  "license": "ISC",
+  "description": "Projeto inicial de backend com framework Express",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.10"
+  }
+}
