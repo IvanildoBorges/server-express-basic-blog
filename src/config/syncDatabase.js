@@ -7,6 +7,7 @@ require("../models/User.model");
 require("../models/Profile.model");
 require("../models/Post.model");
 require("../models/PostTag.model");
+require("../models/Comment.model");
 
 // Arrow function para sincronizar os modelos com o banco de dados
 const syncDatabase = async () => {
