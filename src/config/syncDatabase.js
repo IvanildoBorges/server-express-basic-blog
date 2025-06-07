@@ -3,6 +3,8 @@ const connection = require('../config/database');
 // models
 require('../models/UserTypesModel');
 require('../models/TagsModel');
+require('../models/UserModel');
+require('../models/ProfileModel');
 
 // sicroniza os modelos com o banco de dados, para de fato criar as tabelas
 connection.sync({ alter: true })
