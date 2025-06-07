@@ -1,12 +1,21 @@
-const connection = require('../config/database');
+const connection = require("../config/database");
 
 // models
-require('../models/UserTypesModel');
-require('../models/TagsModel');
-require('../models/UserModel');
-require('../models/ProfileModel');
+require("../models/UserTypes.model");
+require("../models/Tags.model");
+require("../models/User.model");
+require("../models/Profile.model");
+require("../models/Post.model");
+require("../models/PostTag.model");
 
-// sicroniza os modelos com o banco de dados, para de fato criar as tabelas
-connection.sync({ alter: true })
-    .then(() => console.log("Conexão com o banco de dados estabelecida com sucesso!"))
-    .catch((error) => console.error("Erro ao conectar ao banco de dados:", error));
+// Arrow function para sincronizar os modelos com o banco de dados
+const syncDatabase = async () => {
+  try {
+    await connection.sync({ alter: true });
+    console.log("Conexão com o banco de dados estabelecida com sucesso!");
+  } catch (error) {
+    console.error("Erro ao conectar ao banco de dados: ", error);
+  }
+};
+
+module.exports = syncDatabase;

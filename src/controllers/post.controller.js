@@ -1,48 +1,55 @@
-const Post = require('../models/post.model');
+const PostModel = require("../models/Post.model");
+const ProfileModel = require("../models/Profile.model");
+const UserModel = require("../models/User.model");
+const PostTagModel = require("../models/PostTag.model");
+const TagsModel = require("../models/Tags.model");
 
 class PostController {
-    
-    criar(request, response) {
-        const { titulo, conteudo } = request.body;
+  async criar(request, response) {
+    PostModel.belongsToMany(TagsModel, {
+      through: PostTagModel,
+      foreignKey: "post_id",
+      otherKey: "tag_id",
+    });
 
-        Post.criar(titulo, conteudo);
-        return response.status(201).json({
-            mensagem: "Post criado com sucesso!"
-        });
-    }
-    
-    listar(request, response) {
-        const dados = Post.listar();
-        return response.status(200).json(dados);
-    }
-    
-    consultarPorId(request, response) {
-        const { id } = request.params;
+    const { tags, ...body } = request.body;
 
-        const dados = Post.consultarPorId(id);
-        return response.status(200).json(dados);
-    }
-    
-    editar(request, response) {
-        const { id } = request.params;
-        const { titulo, conteudo } = request.body;
+    const post = await PostModel.create(body, {
+      include: {
+        through: PostModel,
+        model: TagsModel,
+      },
+    });
 
-        Post.editar(id, titulo, conteudo);
+    post.setTags(tags);
 
-        return response.status(200).json({
-            mensagem: "Post atualizado com sucesso!"
-        });
-    }
-    
-    deletar(request, response) {
-        const { id } = request.params;
+    return response.status(201).json({
+      mensagem: "Post criado com sucesso!",
+    });
+  }
 
-        Post.deletar(id);
+  async listar(request, response) {
+    PostModel.belongsTo(UserModel, { foreignKey: "user_id" });
+    PostModel.belongsToMany(TagsModel, {
+      through: PostTagModel,
+      foreignKey: "post_id",
+      otherKey: "tag_id",
+    });
+    UserModel.hasOne(ProfileModel, { foreignKey: "user_id" });
 
-        return response.status(200).json({
-            mensagem: "Post deletado com sucesso!"
-        });
-    }
+    const dados = await PostModel.findAll({
+      include: [
+        {
+          model: UserModel,
+          include: ProfileModel,
+        },
+        {
+          model: TagsModel,
+        },
+      ],
+    });
+    return response.status(200).json(dados);
+  }
 }
 
 module.exports = PostController;
