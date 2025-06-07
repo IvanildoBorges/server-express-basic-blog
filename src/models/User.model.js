@@ -1,7 +1,11 @@
 const connection = require("../config/database");
 const { DataTypes, Model } = require("sequelize");
 
-class UserModel extends Model {}
+class UserModel extends Model {
+  static associaUsers({ ProfileModel }) {
+    UserModel.hasOne(ProfileModel, { foreignKey: "user_id" });
+  }
+}
 
 UserModel.init(
   {
