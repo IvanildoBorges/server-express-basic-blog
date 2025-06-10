@@ -25,6 +25,7 @@ CommentModel.init(
         model: UserModel,
         key: "id",
       },
+      onDelete: "NO ACTION",
     },
     post_id: {
       type: DataTypes.INTEGER,
@@ -33,6 +34,7 @@ CommentModel.init(
         model: PostModel,
         key: "id",
       },
+      onDelete: "CASCADE",
     },
     parent_id: {
       type: DataTypes.INTEGER,
