@@ -5,14 +5,20 @@ const AuthController = require("../controllers/auth.controller");
 
 const PublicRotas = express.Router();
 
-PublicRotas.post("/login", (request, response) => {
+PublicRotas.post("/login", async (request, response) => {
   const { email, password } = request.body;
   const auth = new AuthController();
 
-  const dados = auth.login(email, password);
+  const dados = await auth.login(email, password);
 
   if (dados) {
-    const token = jwt.sign(dados, process.env.JWT_SECRET);
+    const dadosToken = {
+      id: dados.id,
+      email: dados.email,
+      username: dados.username,
+      exp: Math.floor(Date.now() / 1000) + 60 * 60,
+    };
+    const token = jwt.sign(dadosToken, process.env.JWT_SECRET);
     return response.status(200).json({ token: token });
   }
 

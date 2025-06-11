@@ -1,3 +1,4 @@
+const MD5 = require("crypto-js/md5");
 const UserModel = require("../models/User.model");
 const ProfileModel = require("../models/Profile.model");
 
@@ -8,6 +9,8 @@ class UserController {
 
   criar(request, response) {
     const body = request.body;
+    const password = MD5(body.password).toString();
+    body.password = password;
 
     UserModel.create(body, { include: ProfileModel });
     return response.status(201).json({
