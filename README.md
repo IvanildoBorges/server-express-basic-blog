@@ -32,13 +32,13 @@ O projeto usa **JWT (JSON Web Token)** para proteger as rotas privadas. As crede
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-backend-blog.git
+git clone https://github.com/IvanildoBorges/server-express-basic-blog.git
 ```
 
 2. Acesse o diretório:
 
 ```bash
-cd servidor-nodejs-express
+cd server-express-basic-blog
 ```
 
 3. Instale as dependências:
