@@ -13,11 +13,11 @@ Este é o backend do projeto de blog desenvolvido com **Node.js** e **Express**,
 - [crypto-js](https://www.npmjs.com/package/crypto-js) ^4.2.0
 - [nodemon](https://nodemon.io/) ^3.1.10 (dev)
 
-## 🔐 Autenticação
+## Autenticação
 
 O projeto usa **JWT (JSON Web Token)** para proteger as rotas privadas. As credenciais são criptografadas com `crypto-js` e armazenadas com segurança.
 
-## 🌐 Rotas Disponíveis
+## Rotas Disponíveis
 
 | Rota        | Tipo     | Descrição                         |
 |-------------|----------|-----------------------------------|
@@ -27,7 +27,7 @@ O projeto usa **JWT (JSON Web Token)** para proteger as rotas privadas. As crede
 | `/comments` | CRUD     | Gerencia comentários  (private)   |
 | `/tags`     | CRUD     | Gerencia tags         (private)   |
 
-## ⚙️ Instalação
+## Instalação
 
 1. Clone o repositório:
 
